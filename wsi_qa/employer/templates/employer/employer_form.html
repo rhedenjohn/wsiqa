@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{%load staticfiles%}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Update Employer
+<a href="{% url 'employer:emp_list' %}" class="btn-back"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back"></i></a>
+{% endblock %}
+
+{% block body_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'employer/css/style.css' %}">
+  {# update #}
+  <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="form-group col-md-6">
+        {{user_form.first_name|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-6">
+        {{user_form.last_name|as_crispy_field}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        {{user_form.email|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-6">
+        {{user_form.username|as_crispy_field}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        {{emp_form.department|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-6">
+        {{emp_form.company|as_crispy_field}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        {{emp_form.comments|as_crispy_field}}
+      </div>
+    </div>
+    <input type="submit" name="" class="btn btn-primary" id="btn-save" value="Update">
+  </form>
+
+{% endblock %}

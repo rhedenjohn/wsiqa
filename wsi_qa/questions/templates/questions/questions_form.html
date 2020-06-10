@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+{% if not form.instance.pk %}
+Create Questions
+{% else %}
+Update Questions
+<a href="{% url 'questions:question_List' %}" class="btn-back"><i class = "fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back"></i></a>
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+
+{% if not form.instance.pk %}
+  {# create #}
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  {# {{ form.as_p }} #}
+  <div class="row">
+    <div class="form-group col-md-12">
+      {# company and department #}
+      {{form.question|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      {# process and category #}
+      {{form.process|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-6">
+      {{form.category|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-4">
+      {# area, skill, difficulty, choice, answer #}
+      {{form.area|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-4">
+      {{form.skill|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-4">
+      {{form.difficulty|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <div class="input-choice-answer">
+        {{form.choice|as_crispy_field}}
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="input-choice-answer">
+        {{form.answer|as_crispy_field}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      {{form.comments|as_crispy_field}}
+    </div>
+  </div>
+
+  <input type="submit" class='btn btn-primary' id="btn-save" value="Create">
+</form>
+{% else %}
+{# update #}
+
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  {# {{ form.as_p }} #}
+  <div class="row">
+    <div class="form-group col-md-12">
+      {# company and department #}
+      {{form.question|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      {# process and category #}
+      {{form.process|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-6">
+      {{form.category|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-3">
+      {# area, skill, difficulty and exam #}
+      {{form.area|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3">
+      {{form.skill|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3">
+      {{form.difficulty|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <div class="input-choice-answer">
+        {{form.choice|as_crispy_field}}
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="input-choice-answer">
+        {{form.answer|as_crispy_field}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      {{form.comments|as_crispy_field}}
+    </div>
+  </div>
+
+  <input type="submit" class='btn btn-primary' value="Update" id="btn-save">
+</form>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+{% if not form.instance.pk %}
+Create New Department
+{% else %}
+Update Department
+<a href="{% url 'employer:dept_list' %}" class="btn-back"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back"></i></a>
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+  {% if not form.instance.pk %}
+  {# create department #}
+    <link rel="stylesheet" type="text/css" href="{% static 'employer/css/style.css' %}">
+  <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col-md-12">
+      {{form.department|as_crispy_field}}
+    </div>
+  </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        {{form.createdBy|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-4">
+        {{form.comments|as_crispy_field}}
+      </div>
+    </div>
+    <input type="submit" name="" class="btn btn-primary" id="btn-save" value="Create">
+  </form>
+  {% else %}
+  {# update #}
+    <link rel="stylesheet" type="text/css" href="{% static 'employer/css/style.css' %}">
+  <form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col-md-12">
+      {{form.department|as_crispy_field}}
+    </div>
+  </div>
+    <input type="submit" name="" class="btn btn-primary" value="Update" id="btn-save">
+  </form>
+  {% endif %}
+
+  {% endblock %}

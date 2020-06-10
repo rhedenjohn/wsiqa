@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block container_title  %}
+{% if not form.instance.pk %}
+Create Applicants Exam
+{% else %}
+Update Applicants Exam
+{% endif %}
+{% endblock  %}
+
+{% block additional_links %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block body_block %}
+{% if not form.instance.pk %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{form.applicant|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-6">
+      <div style="overflow-y: scroll; width:100%;height:150px;">
+        {{form.exam|as_crispy_field}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{form.exam_Date|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-6">
+      {{form.expire_Date|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-4">
+      {{form.score|as_crispy_field}}
+    </div>
+  </div>
+  <input type="submit" name="" class="btn btn-primary" value="Create" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+</form>
+{% else %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{form.applicant|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-6">
+      <div style="overflow-y: scroll; width:100%;height:150px;">
+        {{form.exam|as_crispy_field}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{form.exam_Date|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-6">
+      {{form.expire_Date|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-4">
+      {{form.score|as_crispy_field}}
+    </div>
+  </div>
+  <input type="submit" name="" class="btn btn-primary" value="Update" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+</form>
+{% endif %}
+{% endblock  %}
+
+{% block additional_js %}
+{{ form.media.js }}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Create Applicants
+{% endblock %}
+{% block body_block %}
+
+
+          <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="form-group col-md-4">
+                {{ user_form.first_name|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4">
+                {{ user_form.last_name|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4">
+                {{ user_form.email|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                {{ user_form.username|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6">
+                {{ user_form.password|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-3">
+                {{ applicants_form.createdBy|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6">
+                {{ applicants_form.comments|as_crispy_field }}
+              </div>
+            </div>
+
+            <input type="submit" name="" class="btn btn-primary" value="Create" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+          </form>
+
+
+{% endblock %}

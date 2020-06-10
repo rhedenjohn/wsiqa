@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Details of Category
+<a href="{% url 'questions:category_Create' %}"><i class="fa fa-plus-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Create Another Category" style="float:right; "></i></a>
+<a href="{% url 'questions:category_List' %}"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right; padding-right: 10px;"></i></a>
+{% endblock  %}
+
+{% block body_block  %}
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Category: {{caregoryDetail.category}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created By: {{caregoryDetail.createdBy}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created Date: {{caregoryDetail.createdDate}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Comments: {{caregoryDetail.comments}}
+{% endblock  %}

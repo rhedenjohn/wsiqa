@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{%load staticfiles%}
+
+{% block container_title  %}
+List of Employers
+
+{% endblock  %}
+
+{% block body_block  %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'employer/css/style.css' %}">
+
+<div class="table-responsive">
+  <table class="table table-border">
+    <thead>
+      <tr class="tr-head">
+        <th>Name</th>
+        <th>Company</th>
+        <th>Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    {# employerList is in views.py #}
+    {% for employer in employerList %}
+    <tr class="tr-data">
+      <td>{{employer.user.first_name}} {{employer.user.last_name}}</td>
+      <td>{{employer.company}}</td>
+      <td>{{employer.department}}</td>
+      <td>
+        <center>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" id="dropdown-btn">Action</button>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+          <a class="dropdown-item" id="dropdown-edit" href="{% url 'employer:emp_update' pk=employer.pk %}"><i class='fa fa-edit'></i> Update</a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="dropdown-info" href="{% url 'employer:emp_detail' pk=employer.pk %}"><i class='fa fa-info-circle'></i> View</a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="dropdown-trash" href="{% url 'employer:emp_delete' pk=employer.pk %}"><i class='fa fa-times-circle'></i> Delete</a>
+        </div>
+      </div>
+    </center>
+    </td>
+    {% endfor %}
+  </table>
+</div>
+
+{% if is_paginated %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"> <span aria-hidden="true">&laquo;</span> Previous</a></li>
+    {% endif %}
+
+    {% for n in page_obj.paginator.page_range %}
+      {% if page_obj.number == n %}
+        <li class="page-item active">
+          <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+        </li>
+      {% elif n > page_obj.number|add:'-3' and n < page_obj.number|add:'3' %}
+        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next <span aria-hidden="true">&raquo;</span></a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock  %}

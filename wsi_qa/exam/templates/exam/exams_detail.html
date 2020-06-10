@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block container_title %}
+Details of Exam
+<a href="{% url 'exam:list_exam' %}"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right;"></i></a>
+
+{% endblock  %}
+
+{% block body_block  %}
+<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+Exam: {{examDetail.exam}}<br>
+<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+Time Duration: {{examDetail.timeDuration}}<br>
+<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+Created By: {{examDetail.createdBy}}<br>
+<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+Created Date: {{examDetail.createdDate}}<br>
+<i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+Comments: {{examDetail.comments}}<br>
+
+{% for question in examDetail.questions.all %}
+  <p>{{question.question}}</p>
+{% endfor %}
+
+{% endblock  %}

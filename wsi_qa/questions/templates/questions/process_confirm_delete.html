@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load staticfiles%}
+
+{% block container_title  %}
+Are you sure you want to delete this data?
+{% endblock  %}
+
+{% block body_block  %}
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+
+<div class="table-responsive">
+  <table class='table table-border'>
+    <thead>
+      <tr class="tr-head">
+        <th>Process</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tr class="tr-data">
+      <td>{{process.process}}</td>
+      <td>
+        <form action="" method="post">{% csrf_token %}
+          <center><input class='btn btn-danger' type="submit" value="Confirm" id="btn-confirm" /></center>
+        </form>
+     </td>
+     <td><center><a href="{% url 'questions:process_List' %}" class="btn btn-dark btn-large" id="btn-cancel">Cancel</a></center> </td>
+    </tr>
+  </table>
+</div>
+{% endblock  %}

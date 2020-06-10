@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Details of Difficulty
+<a href="{% url 'questions:difficulty_Create' %}"><i class="fa fa-plus-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Create Another Difficulty" style="float:right; "></i></a>
+<a href="{% url 'questions:difficulty_List' %}"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right; padding-right: 10px;"></i></a>
+{% endblock  %}
+
+{% block body_block  %}
+{# difficultyDetail is in views.py #}
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Difficulty: {{difficultyDetail.difficulty}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created By: {{difficultyDetail.createdBy}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created Date: {{difficultyDetail.createdDate}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Comments: {{difficultyDetail.comments}}
+{% endblock  %}

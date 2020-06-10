@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block container_title %}
+Details of Company
+<a href="{% url 'employer:com_list' %}" class="btn-back"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back"></i></a>
+{% endblock  %}
+
+{% block body_block  %}
+{# companyDetail is in views.py #}
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Company: {{companyDetail.company}}<br>
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created By: {{companyDetail.createdBy}}<br>
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created Date: {{companyDetail.createdDate}}<br>
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Comments: {{companyDetail.comments}}<br>
+
+
+{% endblock  %}

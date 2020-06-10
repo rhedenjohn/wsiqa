@@ -1,0 +1,53 @@
+table{
+    border-collapse: collapse;
+}
+
+thead{
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);
+}
+.tr-head{
+  color: white;
+  text-align:center;
+}
+.tr-data {
+  text-align: center;
+  color: black;
+}
+
+.tr-data:hover{
+  color: blue;
+}
+
+#dropdown-btn{
+  background: linear-gradient(to right, #182848, #4b6cb7) !important;
+}
+
+#dropdown-edit {
+  color: green;
+}
+
+#dropdown-info {
+  color: orange;
+}
+
+#dropdown-trash {
+  color: red;
+}
+
+.btn-back{
+  float:right;
+}
+
+#btn-save{
+  background: linear-gradient(to bottom, #182848, #4b6cb7);
+  color: white;
+}
+
+#btn-confirm{
+  background: linear-gradient(to right, #1a2980, #26d0ce);
+  border:0px;
+}
+
+#btn-cancel{
+  background: linear-gradient(to right, #8e0e00, #1f1c18);
+}

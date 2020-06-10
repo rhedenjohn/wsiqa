@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block container_title  %}
+List of Choices
+{% endblock  %}
+{% block body_block  %}
+
+<div id="demo table-responsive"><table class="table table-bordered table-striped">
+<thead class="thead-dark"> <!-- add class="thead-light" for a light header -->
+  <tr>
+    <th>Choices</th>
+    <th class="sorter-false filter-false">Actions</th></tr>
+    <!-- <th class="filter-select filter-exact" data-placeholder="Pick a gender">Sex</th> for filtering depending on value-->
+</thead>
+<tfoot>
+  <tr>
+    <th>Choices</th>
+    <th>Actions</th>
+  </tr>
+  <tr>
+    <th colspan="7" class="ts-pager">
+      <div class="form-inline">
+        <div class="btn-group btn-group-sm mx-1" role="group">
+          <button type="button" class="btn btn-secondary first" title="first">&#8676;</button>
+          <button type="button" class="btn btn-secondary prev" title="previous">&larr;</button>
+        </div>
+        <span class="pagedisplay"></span>
+        <div class="btn-group btn-group-sm mx-1" role="group">
+          <button type="button" class="btn btn-secondary next" title="next">&rarr;</button>
+          <button type="button" class="btn btn-secondary last" title="last">&#8677;</button>
+        </div>
+        <br/><br/>
+        <select class="custom-select px-4 pagesize input-mini" title="Select page size">
+          <option selected="selected" value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="all">All</option>
+        </select><br/><br/>
+        <select class="input-mini custom-select px-4 pagenum" title="Select page number"></select>
+      </div>
+    </th>
+  </tr>
+</tfoot>
+<tbody>
+  <tr>
+    {% for choice in choiceList %}
+    <tr>
+      <td>{{choice.choices}}</td>
+      <td align='center'>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary" id="dropdown-btn"><i class='fa fa-tasks'></i> Action</button>
+          <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+          <a class="dropdown-item" id="dropdown-edit" href="{% url 'questions:choice_Update' pk=choice.pk %}"><i class='fa fa-edit'></i> Update</a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="dropdown-info" href="{% url 'questions:choice_Detail' pk=choice.pk %}"><i class='fa fa-info-circle'></i> View</a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="dropdown-trash" href="{% url 'questions:choice_Delete' choice.id %}" class="confirm-delete" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{choice.id}}"><i class='fa fa-times-circle'></i> Delete</a>
+        </div>
+      </div>
+      </td>
+      {% endfor %}
+  </tr>
+
+</tbody>
+</table></div>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body confirm-delete">
+        Are you sure you want to delete this data?
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmDeleteButtonModal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock  %}
+{% block additional_links %}
+<link rel="stylesheet" href="{% static 'questions/tablesorter-master/css/jq.css' %}">
+<link rel="stylesheet" href="{% static 'questions/tablesorter-master/css/bootstrap-v4.min.css' %}">
+<link href="{% static 'questions/tablesorter-master/css/prettify.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'questions/tablesorter-master/css/theme.bootstrap_4.css' %}">
+<link rel="stylesheet" href="{% static 'questions/tablesorter-master/addons/pager/jquery.tablesorter.pager.css' %}">
+{% endblock  %}
+{% block additional_js %}
+<script src="{% static 'questions/tablesorter-master/js/jquery-latest.min.js' %}"></script>
+<script src="{% static 'questions/tablesorter-master/js/prettify.js' %}"></script>
+<script src="{% static 'questions/tablesorter-master/js/docs.js' %}"></script>
+<script src="{% static 'questions/tablesorter-master/js/jquery.tablesorter.js' %}"></script>
+<script src="{% static 'questions/tablesorter-master/js/jquery.tablesorter.widgets.js' %}"></script>
+<script src="{% static 'questions/tablesorter-master/addons/pager/jquery.tablesorter.pager.js' %}"></script>
+<script type="text/javascript">
+$(document).on('click', '.confirm-delete', function () {
+$("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+});
+
+$(document).on('click', '#confirmDeleteButtonModal', function () {
+var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+window.location = $("#".concat(caller)).attr("href");
+});
+</script>
+<script id="js">$(function() {
+
+$("table").tablesorter({
+  theme : "bootstrap",
+
+  widthFixed: true,
+
+  // widget code contained in the jquery.tablesorter.widgets.js file
+  // use the zebra stripe widget if you plan on hiding any rows (filter widget)
+  // the uitheme widget is NOT REQUIRED!
+  widgets : [ "filter", "columns", "zebra" ],
+
+  widgetOptions : {
+    // using the default zebra striping class name, so it actually isn't included in the theme variable above
+    // this is ONLY needed for bootstrap theming if you are using the filter widget, because rows are hidden
+    zebra : ["even", "odd"],
+
+    // class names added to columns when sorted
+    columns: [ "primary", "secondary", "tertiary" ],
+
+    // reset filters button
+    filter_reset : ".reset",
+
+    // extra css class name (string or array) added to the filter element (input or select)
+    filter_cssFilter: [
+      'form-control',
+      'form-control',
+      'form-control custom-select', // select needs custom class names :(
+      'form-control',
+      'form-control',
+      'form-control',
+      'form-control'
+    ]
+
+  }
+})
+.tablesorterPager({
+
+  // target the pager markup - see the HTML block below
+  container: $(".ts-pager"),
+
+  // target the pager page select dropdown - choose a page
+  cssGoto  : ".pagenum",
+
+  // remove rows from the table to speed up the sort of large tables.
+  // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+  removeRows: false,
+
+  // output string - default is '{page}/{totalPages}';
+  // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
+  output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
+
+});
+
+});</script>
+
+<script>
+$(function() {
+
+  // filter button demo code
+  $('button.filter').click(function() {
+    var col = $(this).data('column'),
+      txt = $(this).data('filter');
+    $('table').find('.tablesorter-filter').val('').eq(col).val(txt);
+    $('table').trigger('search', false);
+    return false;
+  });
+
+  // toggle zebra widget
+  $('button.zebra').click(function() {
+    var t = $(this).hasClass('btn-success');
+    $('table')
+      .toggleClass('table-striped')[0]
+      .config.widgets = (t) ? ["filter"] : ["filter", "zebra"];
+    $(this)
+      .toggleClass('btn-danger btn-success')
+      .find('span')
+      .text(t ? 'disabled' : 'enabled');
+    $('table').trigger('refreshWidgets', [false]);
+    return false;
+  });
+});
+</script>
+{% endblock  %}

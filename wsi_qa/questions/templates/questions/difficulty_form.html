@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+{% if not form.instance.pk %}
+Create Difficulty
+{% else %}
+Update Difficulty
+<a href="{% url 'questions:difficulty_List' %}" class="btn-back"><i class = "fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right;"></i></a>
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+
+{% if not form.instance.pk %}
+  {# create #}
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="form-group col-md-12">
+      {{form.difficulty|as_crispy_field}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      {{form.comments|as_crispy_field}}
+    </div>
+  </div>
+
+  <input type="submit" class='btn btn-primary' value="Create" id="btn-save">
+</form>
+{% else %}
+{# update #}
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="form-group col-md-12">
+      {{form.difficulty|as_crispy_field}}
+    </div>
+  </div>
+
+  <input type="submit" class='btn btn-primary' value="Update" id="btn-save">
+</form>
+{% endif %}
+
+{% endblock %}

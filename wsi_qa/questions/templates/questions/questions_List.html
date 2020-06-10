@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block container_title  %}
+List of Questions
+{% endblock  %}
+{% block body_block  %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+
+<div class="container mt-3">
+
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <div class="table-responsive">
+    <table class="table table-border">
+      <thead>
+        <tr class="tr-head">
+          <th>Question</th>
+          <th>Choices</th>
+          <th>Answer</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for question in questionList %}
+
+        <tr class="tr-data">
+  <td>{{question.question}}</td>
+  <td>
+  {% for choice in question.choice.all %}
+       {{ choice }},
+  {% endfor %}
+  </td>
+  <td>
+    {% for ans in question.answer.all %}
+         {{ ans }},
+    {% endfor %}
+  </td>
+  <td>
+    <center>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" id="dropdown-btn">Action</button>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu">
+      <a class="dropdown-item" id="dropdown-edit" href="{% url 'questions:question_Update' pk=question.pk %}"><i class='fa fa-edit'></i> Update</a>
+
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" id="dropdown-info" href="{% url 'questions:question_Detail' pk=question.pk %}"><i class='fa fa-info-circle'></i> View</a>
+
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" id="dropdown-trash" href="{% url 'questions:question_Delete' pk=question.pk %}"><i class='fa fa-times-circle'></i> Delete</a>
+    </div>
+  </div>
+  </center>
+  </td>
+        </tr>
+
+  {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if is_paginated %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"> <span aria-hidden="true">&laquo;</span> Previous</a></li>
+    {% endif %}
+
+    {% for n in page_obj.paginator.page_range %}
+      {% if page_obj.number == n %}
+        <li class="page-item active">
+          <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+        </li>
+      {% elif n > page_obj.number|add:'-3' and n < page_obj.number|add:'3' %}
+        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next <span aria-hidden="true">&raquo;</span></a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock  %}

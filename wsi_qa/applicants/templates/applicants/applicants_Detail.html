@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Details of Applicants
+<a href="{% url 'applicants:applicants_create' %}"><i class="fa fa-plus-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Create Another Applicant" style="float:right; "></i></a>
+<a href="{% url 'applicants:applicants_list' %}"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right; padding-right: 10px;"></i></a>
+{% endblock  %}
+
+{% block body_block  %}
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Name: {{applicantDetail.user.first_name}} {{applicantDetail.user.last_name}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Email: {{applicantDetail.user.email}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Username: {{applicantDetail.user}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created By: {{applicantDetail.createdBy}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created Date: {{applicantDetail.createdDate}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Comments: {{applicantDetail.comments}}
+{% endblock  %}

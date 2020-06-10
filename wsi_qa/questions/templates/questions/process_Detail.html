@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Details of Process
+<a href="{% url 'questions:process_Create' %}" class="btn-create"><i class="fa fa-plus-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Create Another Process"></i></a>
+<a href="{% url 'questions:process_List' %}" class="btn-back-detail"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" ></i></a>
+{% endblock  %}
+
+{% block body_block  %}
+<link rel="stylesheet" type="text/css" href="{% static 'questions/css/style.css' %}">
+
+{# processDetail is in views.py #}
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Process: {{processDetail.process}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created By: {{processDetail.createdBy}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created Date: {{processDetail.createdDate}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Comments: {{processDetail.comments}}
+{% endblock  %}

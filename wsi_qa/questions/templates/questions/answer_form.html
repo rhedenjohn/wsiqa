@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+{% if not form.instance.pk %}
+Create Answer
+{% else %}
+Update Answer
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+
+    {% if not form.instance.pk %}
+    <form enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="form-group col-md-6">
+          {{form.answer|as_crispy_field}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          {{form.comments|as_crispy_field}}
+        </div>
+      </div>
+
+      <input type="submit" class='btn btn-primary' value="Create" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+    </form>
+    {% else %}
+    <form enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <div class="form-group col-md-6">
+          {{form.question|as_crispy_field}}
+        </div>
+        <div class="form-group col-md-6">
+          {{form.answer|as_crispy_field}}
+        </div>
+      </div>
+      <input type="submit" class='btn btn-primary' value="Update" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+    </form>
+    {% endif %}
+{% endblock %}

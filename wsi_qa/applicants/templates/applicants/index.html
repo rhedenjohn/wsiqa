@@ -1,0 +1,210 @@
+{% extends "applicants/applicants_base.html" %}
+{% block body_block %}
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+                <div class="sidebar">
+                    <ul class='widget widget-usage unstyled span3'>
+                        <div class="user-profile-container">
+                            <div class="user-profile-icon"><i class="fa fa-user-circle fa-3x"></i></div>
+                            <div class="user-profile-section">
+                                <div class="user-profile-name"><strong>{{request.user.first_name}} {{request.user.last_name}}</strong></div>
+                                <div class="user-profile-link">View Profile</div>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="widget widget-usage unstyled span3">
+                        <div class="module-head">
+                            <h3>Exam Progress</h3>
+                        </div>
+                        <li>
+                            <p>
+                                <strong>Java - Completed</strong> <span class="pull-right small muted">100%</span>
+                            </p>
+                            <div class="progress tight">
+                                <div class="bar bar-success" style="width: 100%;">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p>
+                                <strong>Python - Not yet taken</strong> <span
+                                    class="pull-right small muted">0%</span>
+                            </p>
+                            <div class="progress tight">
+                                <div class="bar bar-success" style="width: 0%;">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="widget unstyled span3">
+                        <div class="module message">
+                            <div class="module-body table">
+                                <table class="table table-message">
+                                    <tbody>
+                                        <tr class="heading">
+                                            <td class="cell-icon"></td>
+                                            <td class="cell-title">Exam</td>
+                                            <td class="cell-status">Status</td>
+                                            <td class="cell-time align-right">Due Date</td>
+                                        </tr>
+                                        <tr class="task">
+                                            <td class="cell-icon"><i class="icon-checker high"></i></td>
+                                            <td class="cell-title">
+                                                <div>Java
+                                                </div>
+                                            </td>
+                                            <td class="cell-status-active"><b class="due">Active</b></td>
+                                            <td class="cell-time align-right">Just Now</td>
+                                        </tr>
+                                        <tr class="task">
+                                            <td class="cell-icon"><i class="icon-checker"></i></td>
+                                            <td class="cell-title">
+                                                <div>Python
+                                                </div>
+                                            </td>
+                                            <td class="cell-status"><b class="due">Missed</b></td>
+                                            <td class="cell-time align-right">Just Now</td>
+                                        </tr>
+                                        <tr class="task">
+                                            <td class="cell-icon"><i class="icon-checker"></i></td>
+                                            <td class="cell-title">
+                                                <div>PHP
+                                                </div>
+                                            </td>
+                                            <td class="cell-status"><b class="due">Missed</b></td>
+                                            <td class="cell-time align-right">Yesterday</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+                <!--/.sidebar-->
+            </div>
+            <!--/.span3-->
+            <div class="span9">
+                <div class="content">
+                    <div class="btn-controls">
+                        <div class="btn-box-row row-fluid">
+                            <div class="span8">
+                                <div class="content">
+                                    <div class="module">
+                                        <div class="module-body">
+                                            <div class="container-fluid text-center">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                                                        <div class="new-message-box">
+                                                            <div class="new-message-box-alert">
+                                                                <div class="info-tab tip-icon-alert" title="note">
+                                                                    <i></i></div>
+                                                                <div class="tip-box-alert">
+                                                                    <!--<p><strong>Tip:</strong> If you want to enable the fading transition effect while closing the alert boxes, apply the classes <code>.fade</code> and <code>.in</code> to them along with the contextual class.</p>-->
+                                                                    <p align='center'>You have an upcoming exam this
+                                                                        <br> 10/10/2020 and 10/11/2020</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="alert">
+                                                <div class="alert-icon">
+                                                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                        <path fill="var(--color)"
+                                                            d="M10 3H14V14H10V3M10 21V17H14V21H10Z" />
+                                                    </svg>
+                                                </div>
+                                                <p class="alert-message">
+                                                    <strong>NOTE!</strong> If you proceed with the exam take note
+                                                    that you cannot back off or exit.
+                                                    If you do so, your exam will be automatically failed.
+                                                </p>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div id="container">
+                                                <center>
+                                                <button class="learn-more butn">
+                                                  <span class="circle" aria-hidden="true">
+                                                    <span class="icon arrow"></span>
+                                                  </span>
+                                                  <span class="button-text hvrhide">Java</span>
+                                                  <span class="button-text show">Take Exam</span>
+                                                </button>
+                                                </center>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <!--/.content-->
+                                </div>
+                                <!--/.span9-->
+                            </div>
+                            <ul class="widget unstyled span3">
+                                <div class="module message">
+                                    <div class="module-body table">
+                                        <table class="table table-message">
+                                            <tbody>
+                                                <tr class="heading">
+                                                    <td class="cell-icon"></td>
+                                                    <td class="cell-title">Exam</td>
+                                                    <td class="cell-status">Result</td>
+                                                    <td class="cell-time align-right">Due Date</td>
+                                                </tr>
+                                                <tr class="task">
+                                                    <td class="cell-icon"><i class="icon-checker high"></i></td>
+                                                    <td class="cell-title">
+                                                        <div>Java
+                                                        </div>
+                                                    </td>
+                                                    <td class="cell-status-active"><b class="due">Passed</b></td>
+                                                    <td class="cell-time align-right">Just Now</td>
+                                                </tr>
+                                                <tr class="task">
+                                                    <td class="cell-icon"><i class="icon-checker"></i></td>
+                                                    <td class="cell-title">
+                                                        <div>Python
+                                                        </div>
+                                                    </td>
+                                                    <td class="cell-status"><b class="due">Failed</b></td>
+                                                    <td class="cell-time align-right">Just Now</td>
+                                                </tr>
+                                                <tr class="task">
+                                                    <td class="cell-icon"><i class="icon-checker"></i></td>
+                                                    <td class="cell-title">
+                                                        <div>PHP
+                                                        </div>
+                                                    </td>
+                                                    <td class="cell-status"><b class="due">----------</b></td>
+                                                    <td class="cell-time align-right">Yesterday</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id="container1">
+                                        <button class="learn-more1 btn1">Review Answer</button>
+                                      </div>
+                                </div>
+                                <br/>
+                                <div>
+                                    <div id="container1">
+                                        <button class="learn-more1 btn1">Summary</button>
+                                      </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/.content-->
+            </div>
+            <!--/.span9-->
+        </div>
+    </div>
+    <!--/.container-->
+</div>
+{% endblock  %}

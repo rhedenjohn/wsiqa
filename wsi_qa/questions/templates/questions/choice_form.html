@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+{% if not form.instance.pk %}
+Create Choice
+{% else %}
+Update Choice
+<a href="{% url 'questions:choice_List' %}"><i class = "fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right;"></i></a>
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+
+{% if not form.instance.pk %}
+  {# create #}
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{form.choices|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-4">
+      {{form.comments|as_crispy_field}}
+    </div>
+  </div>
+
+  <input type="submit" class='btn btn-primary' value="Create" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+</form>
+{% else %}
+{# update #}
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{form.choices|as_crispy_field}}
+    </div>
+  </div>
+
+  <input type="submit" class='btn btn-primary' value="Update" style="background: linear-gradient(to bottom, #182848, #4b6cb7); color: white;">
+</form>
+{% endif %}
+
+{% endblock %}

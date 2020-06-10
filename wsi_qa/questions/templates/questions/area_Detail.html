@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block container_title %}
+Details of Area/Expertise
+<a href="{% url 'questions:area_Create' %}"><i class="fa fa-plus-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Create Another Area/Expertise" style="float:right; "></i></a>
+<a href="{% url 'questions:area_List' %}"><i class="fa fa-arrow-circle-left fa-lg" data-toggle="tooltip" data-placement="bottom" title="Back" style="float:right; padding-right: 10px;"></i></a>
+{% endblock  %}
+
+{% block body_block  %}
+{# processDetail is in views.py #}
+
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Area: {{areaDetail.area}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created By: {{areaDetail.createdBy}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Created Date: {{areaDetail.createdDate}}<br>
+<i class="fa fa-angle-right" aria-hidden="true"></i>
+Comments: {{areaDetail.comments}}
+{% endblock  %}

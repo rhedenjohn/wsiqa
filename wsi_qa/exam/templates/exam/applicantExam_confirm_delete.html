@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block container_title  %}
+Are you sure you want to delete this data?
+{% endblock  %}
+
+{% block body_block  %}
+<div class="table-responsive">
+  <table border='1' class='table table-bordered'>
+    <thead style="background: linear-gradient(to bottom, #1e3c72, #2a5298); color: white; text-align: center;">
+      <tr>
+        <th>Applicant </th>
+        <th>Exam</th>
+        <th>Exam Date</th>
+        <th colspan='2'>Actions</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>{{applicantDelete.applicant}}</td>
+      <td>{% for exam in applicantDelete.exam.all  %}
+          {{exam}},
+      {% endfor %}
+      </td>
+      <td>{{applicantDelete.exam_Date}} - {{applicantDelete.expire_Date}}</td>
+      <td style ="border-right: hidden;">
+        <form action="" method="post">
+          {% csrf_token %}
+          <center><input class='btn btn-danger' type="submit" value="Confirm" style="background: linear-gradient(to right, #1a2980, #26d0ce); border:0px;" /></center>
+        </form>
+     </td>
+     <td><center><a href="{% url 'exam:applicantExam_List' %}" class="btn btn-dark btn-large" style="background: linear-gradient(to right, #8e0e00, #1f1c18);">Cancel</a></center> </td>
+    </tr>
+  </table>
+</div>
+
+
+{% endblock  %}
